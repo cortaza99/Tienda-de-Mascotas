@@ -1,0 +1,84 @@
+﻿@if (ViewBag.Message != null)
+{
+    @using System.Web
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.css">
+    <script type="text/javascript">
+        var mensaje = '@HttpUtility.HtmlDecode(ViewBag.Message)';
+        Swal.fire({
+            title: 'Error',
+            text: mensaje,
+            icon: 'error',
+            confirmButtonText: 'Aceptar'
+        });
+    </script>
+}
+@model RegistroRazaViewModel
+@{
+    var registros = Model.razasTabla.Count();
+    var i = 0;
+    ViewData["Title"] = "Registrar Raza";
+}
+
+<a class="btn rojo" asp-action="gestionarMascotas" asp-controller="Mascotas">Regresar</a>
+<div class="containerRazaAnimal">
+    <form method="post" asp-action="registrarRaza" asp-controller="Mascotas">
+    <div id="containerSelect">
+        <span>Especie:</span>
+        <select id="especiesLista" name="especieSeleccionada">
+            @foreach(var item in Model.especiesSelect)
+            {
+                <option value=@item.idEspecieMascota>@item.especieMascota</option>
+            }
+        </select>
+    </div>
+
+    <div class="tarjetaAntecedente">
+        <div class="tarjetaAntecedente-header">
+            <p><strong>Agregar nombre raza animal</strong></p>
+        </div>
+        <div class="tarjetaAntecedente-body">
+            <input type="text" name="nombreRaza">
+            <button class="btn azul">Agregar</button>
+        </div>
+    </div>
+    </form>
+</div>
+<div class="tablaAntecedente">
+    <img src="~/img/raza.png" id="razaImagen" alt="">
+    <table class="tablaDeAntecedente">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre Raza</th>
+                <th>Nombre especie</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @while (registros>0)
+            {
+                <tr>
+                    <td>@(i+1)</td>
+                    <td>
+                        <p>@Model.razasTabla[i].razaMascota</p>
+                    </td>
+                    <td>
+                        <p>@Model.especiesTabla[i].especieMascota</p>
+                    </td>
+                    <td>
+                        <form method="post" asp-action="eliminarRaza" asp-controller="Mascotas">
+                            <button class="btn amarillo">Eliminar</button>
+                            <input type="hidden" name="razaSeleccionada" value="@Model.razasTabla[i].idRazaMascota" />
+                        </form>
+                    </td>
+                </tr>
+                registros--;
+                i++;
+            }
+        </tbody>
+    </table>
+</div>
+
+
+

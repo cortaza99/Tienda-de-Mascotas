@@ -1,0 +1,31 @@
+﻿@model UsuarioViewModel
+@{
+    ViewData["Title"] = "Modificar usuario";
+}
+<div id="inicioTitulo">
+    <h1 id="tituloInicio" class="titulopersona">MODIFICAR USUARIO</h1>
+</div>
+<form method="post" asp-action="Modificar_Usuario" asp-controller="Persona">
+    <div id="displayborder">
+        <div id="container_img">
+            <img id="inicio4" src="~/img/adoptar.png" alt="inicio4">
+        </div>
+        <div id="display_row">
+            <div id="displaycolum">
+                <label>NOMBRE DE USUARIO:</label>
+                <label>CONTRASEÑA:</label>
+              
+            </div>
+            <div id="displaycolum">
+                <input class="opacity" readonly type="text" value="@Model.nombreUsuario" asp-for="nombreUsuario">
+                <input type="text" value="@Model.contraseniaUsuario" asp-for="contraseniaUsuario">
+                <input type="hidden" value="@Model.idUsuario" asp-for="idUsuario">
+            </div>
+        </div>
+        <div id="container_button">
+            <button type="button" onclick="history.back()" class="btn gris">Volver</button>
+            <button  class="btn gris">Modificar</button>
+        </div>
+    </div>
+</form>
+

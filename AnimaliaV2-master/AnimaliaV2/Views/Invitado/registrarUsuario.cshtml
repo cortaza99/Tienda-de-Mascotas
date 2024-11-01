@@ -1,0 +1,66 @@
+﻿@model RegistroPersonaViewModel
+@{
+    ViewData["Title"] = "registrar usuario";
+}
+    <div id="inicioTitulo">
+        <h1 id="tituloInicio" class="titulopersona">CREAR USUARIO</h1>
+    </div>
+<form method="post" asp-action="registrarUsuario" asp-controller="Invitado">
+        <div id="displayborder">
+            <div id="container_img">
+            <img id="inicio4" src="~/img/adoptar.png" alt="inicio4">
+            </div>
+            <div id="display_row">
+                <div id="displaycolum">
+                    <label>NOMBRE DE USUARIO:</label>
+                    <label>CONTRASEÑA:</label>
+                    <label>REPETIR CONTRASEÑA:</label>
+                </div>
+                <div id="displaycolum">
+                <input type="text" required asp-for="Usuario.nombreUsuario" id="nombreUsuario">
+                <input type="text" required asp-for="Usuario.contraseniaUsuario" id="contra">
+                <input type="text" required id="contraVal">
+
+                </div>
+            </div>
+            <div id="container_button">
+                <button type="button" onclick="history.back()" class="btn gris">Volver</button>
+                <button type="button" id="butonValidacionUsuario" class="btn gris">Registrar</button>
+            </div>
+        </div>
+</form>
+
+
+<script>
+    $(document).ready(function () {
+        // Manejar el evento click del botón Registrar
+
+        $('.btn').click(function (e) {
+            console.log("Si funciona")
+            e.preventDefault(); // Evitar que el formulario se envíe automáticamente
+
+            // Obtener el valor del nombre de usuario ingresado
+            var nombreUsuario = $('#nombreUsuario').val();
+
+            // Realizar una solicitud AJAX para verificar si el nombre de usuario existe
+            $.ajax({
+                url: '/Invitado/VerificarUsuario',
+                type: 'POST',
+                data: { nombreUsuario: nombreUsuario },
+                success: function (result) {
+                    if (result.existe) {
+                        // Mostrar una advertencia si el nombre de usuario ya existe
+                        alert('El nombre de usuario ya existe. Por favor, elija otro nombre de usuario.');
+                    } else {
+                        // Si el nombre de usuario no existe, enviar el formulario para el registro
+                        $('form').unbind('submit').submit();
+                    }
+                },
+                error: function () {
+                    // Manejar errores en la solicitud AJAX si es necesario
+                    alert('Ocurrió un error al verificar el nombre de usuario.');
+                }
+            });
+        });
+    });
+</script>

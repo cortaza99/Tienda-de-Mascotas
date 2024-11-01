@@ -1,0 +1,71 @@
+﻿@if (ViewBag.Message != null)
+{
+    @using System.Web
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.css">
+    <script type="text/javascript">
+        var mensaje = '@HttpUtility.HtmlDecode(ViewBag.Message)';
+        Swal.fire({
+            title: 'Error',
+            text: mensaje,
+            icon: 'error',
+            confirmButtonText: 'Aceptar'
+        });
+    </script>
+}
+@model List<VacunaModel>
+@{
+    var autoId = 1;
+}
+
+<a class="btn azul" asp-action="gestionarMascotas" asp-controller="Mascotas">Regresar</a>
+<h1 class="titulo" id="tituloInicio">Agregar Vacuna</h1>
+<div class="tablaVacuna">
+    <img id="vacunaImagen" src="~/img/perroVacuna.png" alt="">
+    <table class="tablaDeAntecedente">
+        <thead>
+            <tr>
+                <th>ID Vacuna</th>
+                <th>Nombre Vacuna</th>
+                <th>Accion</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var item in Model)
+            {
+                <tr>
+                    <td>@autoId</td>
+                    <td>
+                        <p>@item.nombreVacuna</p>
+                    </td>
+                    <td>
+                        <form method="post" asp-action="eliminarVacuna" asp-controller="Mascotas">
+                            <input type="hidden" name="id" value="@item.idVacuna" />
+                            <button class="btn rojo">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+                autoId++;
+            }
+
+        </tbody>
+    </table>
+</div>
+<div>
+    <div class="tarjetaAntecedente">
+        <div class="tarjetaAntecedente-header">
+            <p>
+                <strong>Nombre de la vacuna</strong><img id="vacunasImagen" src="~/img/vacunas.png"
+                                                         alt="">
+            </p>
+        </div>
+        <div class="tarjetaAntecedente-body">
+            <form method="post" asp-action="registrarVacunas" asp-controller="Mascotas">
+                <input type="text" name="vacuna">
+                <button class="btn azul">Agregar</button>
+            </form>
+        </div>
+    </div>
+</div>
+<br>

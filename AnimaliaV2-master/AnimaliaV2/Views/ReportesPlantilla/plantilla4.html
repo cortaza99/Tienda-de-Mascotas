@@ -1,0 +1,132 @@
+﻿<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            font-family: 'Montserrat', sans-serif;
+            font-size: small;
+        }
+
+        body {
+            padding: 1.5rem;
+        }
+
+        .titulo1 {
+            text-align: center;
+            color: #333333;
+            margin-top: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #0A3143;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .row {
+            display: flex;
+            align-items: center;
+            padding-inline: 4rem;
+        }
+
+        .colLeft {
+            width: 50%;
+            text-align: left;
+        }
+
+        .colRight {
+            width: 50%;
+            text-align: right;
+        }
+
+        #mascotas {
+            width: 3rem;
+            height: 3rem;
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            margin: 0;
+            padding: 10px;
+            text-align: right;
+        }
+    </style>
+
+
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="colLeft">
+                <h4 class="">ANIMALIA</h4>
+            </div>
+            <div class="colRight">
+                <p><strong>FLORENCIA CAQUETA 2023</strong></p>
+            </div>
+        </div>
+        <hr>
+
+        <h2 class="titulo1">{{registros.[0].titulo}}</h2>
+        <table class="table caption-top table-bordered table-hover">
+
+            <thead class="table-dark align-middle text-center">
+                <tr>
+                    <th scope="col">DOCUMENTO DE IDENTIDAD</th>
+                    <th scope="col">NOMBRE COMPLETO DEL ADOPTANTE</th>
+                    <th scope="col">DIRECCION</th>
+                    <th scope="col">CORREO ELECTRONICO</th>
+                    <th scope="col">TELEFONO</th>
+                    <th scope="col">CANTIDAD DE MASCOTAS</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each registros}}
+                <tr>
+                    <td>{{r1}}</td>
+                    <td>{{r2}}</td>
+                    <td>{{r3}}</td>
+                    <td>{{r4}}</td>
+                    <td>{{r5}}</td>
+                    <td>{{r6}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+
+        </table>
+
+
+    </div>
+
+    <div class="footer">
+        Generado el: {{registros.[0].fechaActual}}
+    </div>
+
+
+</body>
+
+</html>
+
+

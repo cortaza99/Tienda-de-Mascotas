@@ -1,0 +1,80 @@
+﻿@model InfoDetalladaViewModel
+@{
+    ViewData["Title"] = "Informacion Detallada";
+}
+
+
+<a asp-action="verMascotas" asp-controller="Mascotas" class="btn amarillo">Regresar</a>
+<div style="border-radius: 5px;border:solid rgb(232, 232, 232);padding: 1rem;width: min-content;margin: auto;margin-top: 3rem;">
+    <div class="containerFormularioRegistro">
+        <img id="imagenModificarRegistroVeterinario" src="~/imgMascotas/@Model.Mascota.nombreImagen" alt="imagen">
+        <div class="entradaFormularioModificar">
+            <label for="">@Model.Mascota.nombreMascota</label>
+            <p>@Model.Mascota.descripcionMascota</p>
+        </div>
+        <div class="entradaFormularioModificar">
+            <form method="post" asp-action="solicitarAdopcionMascota" asp-controller="Mascotas">
+                <input type="hidden" value=@Model.Mascota.idMascota name="id" />
+                <button class="btn verde">Solicitar Adopcion</button>
+
+            </form>
+            <label for="">Especie: @Model.especie</label>
+            <label for="">Raza: @Model.raza</label>
+        </div>
+    </div>
+
+
+    <div class="containerFormularioRegistro">
+        <div class="entradaFormularioModificar">
+            <div class="accordion">
+                <div class="accordion-item">
+                    <div class="accordion-header">Vacuna aplicadas</div>
+                    @foreach(var item in Model.vacunas)
+                    {
+                        <div class="accordion-content">@item.nombreVacuna</div>
+                    }
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-header">Antecedentes del animal</div>
+                    @foreach (var item in Model.antecedentes)
+                    {
+                        <div class="accordion-content">@item.descripcionAntecedente</div>
+                    }
+                    
+                </div>
+            </div>
+
+        </div>
+        <div class="entradaFormularioModificar">
+            <label for="">Mascota rescatada</label>
+            <p>@Model.mascotaRescatada</p>
+        </div>
+        <div class="entradaFormularioModificar">
+            <label for="">Condicion especial</label>
+            <p>@Model.condicionEspecial</p>
+        </div>
+    </div>
+    <div class="containerFormularioRegistro">
+        <div class="entradaFormulario info">
+            <label for="">Dieta: @Model.dieta</label>
+            <label for="">Ubicacion: @Model.ubicacion</label>
+        </div>
+        <div class="entradaFormulario">
+            <label for="">Altura(cm)</label>
+            <p>@(Model.Mascota.alturaMascota == 0 ? "Sin registrar" : Model.Mascota.alturaMascota)</p>
+        </div>
+        <div class="entradaFormulario">
+            <label for="">Peso(kg)</label>
+            <p>@(Model.Mascota.pesoMascota == 0 ? "Sin registrar":Model.Mascota.pesoMascota)</p>
+        </div>
+        <div class="entradaFormulario">
+            <label for="">Color</label>
+            <p>@Model.Mascota.colorMascota</p>
+        </div>
+        <div class="entradaFormulario">
+            <label for="">Nacimiento</label>
+            <p>@(Model.Mascota.nacimientoMascota == null || Model.Mascota.nacimientoMascota=="" ? "Sin registrar":Model.Mascota.nacimientoMascota)</p>
+        </div>
+    </div>
+</div>
+

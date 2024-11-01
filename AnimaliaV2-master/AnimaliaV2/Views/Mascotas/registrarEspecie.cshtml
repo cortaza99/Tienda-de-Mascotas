@@ -1,0 +1,65 @@
+﻿@if (ViewBag.Message != null)
+{
+    @using System.Web
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.css">
+    <script type="text/javascript">
+        var mensaje = '@HttpUtility.HtmlDecode(ViewBag.Message)';
+        Swal.fire({
+            title: 'Error',
+            text: mensaje,
+            icon: 'error',
+            confirmButtonText: 'Aceptar'
+        });
+    </script>
+}
+
+@model List<EspecieMascotaModel>
+@{
+    ViewData["Title"] = "Registrar Especie";
+    var autonumerico = 1;
+}
+
+<a class="btn rojo" asp-action="gestionarMascotas" asp-controller="Mascotas">Regresar</a>
+<div class="tarjetaAntecedente">
+    <div class="tarjetaAntecedente-header">
+        <p><strong>AGREGAR NOMBRE ESPECIE ANIMAL</strong></p>
+    </div>
+    <form method="post" asp-action="registrarEspecie" asp-controller="Mascotas">
+        <div class="tarjetaAntecedente-body">
+            <input type="text" name="especie">
+            <button class="btn azul">Agregar</button>
+        </div>
+    </form>
+</div>
+
+<div class="tablaAntecedente">
+    <table class="tablaDeAntecedente">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre Especie</th>
+                <th>Accion</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var item in Model){
+                <tr>
+                    <td>@autonumerico</td>
+                    <td><p>@item.especieMascota</p>
+                    </td>
+                    <td>
+                        <form method="post" asp-action="eliminarEspecie" asp-controller="Mascotas">
+                            <button class="btn amarillo">Eliminar</button>
+                            <input type="hidden" name="idEspecie" value="@item.idEspecieMascota" />
+                        </form>
+                    </td>
+                </tr>
+                autonumerico++;
+            }
+            <tr>
+        </tbody>
+    </table>
+    <img id="especieImagen" src="~/img/especies.png" alt="">
+</div>
+

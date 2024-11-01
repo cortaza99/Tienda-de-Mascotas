@@ -1,0 +1,51 @@
+﻿@model List<GestionAdopcionViewModel>
+@{
+    ViewData["Title"] = "gestionar donaciones";
+
+}
+<div id="container_img">
+    <div id="inicioTitulo">
+        <h1 id="titulo_tenue" class="titulopersona">GESTIÓN DE DONACIONES</h1>
+    </div>
+</div>
+
+<div id="container_table">
+    <table>
+        <tr>
+            <th>N° de Documento</th>
+            <th>Nombre Completo</th>
+            <th>Nombre Mascota</th>
+            <th>Fecha de la Solicitud</th>
+            <th>Acción</th>
+            <th>Acción</th>
+        </tr>
+         @foreach (var item in Model){
+        <tr>
+            <td>@item.documentoPersona</td>
+            <td>@item.Nombre_Completo</td>
+            <td>@item.nombreMascota</td>
+            <td>@(Convert.ToDateTime(item.fechaSolicitud).ToString("dd-MM-yyyy"))</td>
+            <td>
+                    <form method="post" asp-action="donarMascota" asp-controller="Persona">
+                        <button class="btn morado">Donar</button>
+                        <input type="hidden" name="id_solicitud" value="@item.id_Solicitud" />
+                        <input type="hidden" name="id_mascota" value="@item.idMascota" />
+                    </form>
+            </td>
+            <td>
+                    <form method="post" asp-action="eliminar_solicitud_adopcion" asp-controller="Persona">
+                        <button class="btn tenue">Eliminar</button>
+                        <input type="hidden" name="id_solicitud" value="@item.id_Solicitud" />
+                        <input type="hidden" name="id_mascota" value="@item.idMascota" />
+                    </form>
+                
+            </td>
+        </tr>
+        }
+
+    </table>
+</div>
+<div id="container_button">
+    <a class="btn morado" asp-action="solicitudes" asp-controller="Persona">Volver</a>
+    <label></label>
+</div>

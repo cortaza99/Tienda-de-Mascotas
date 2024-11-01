@@ -1,0 +1,17 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<h1 class="titulo" id="tituloInicio">Gestionar Personas</h1>
+<div class="contenedorGestionarPersonas" style="margin-top: 7rem;">
+    <a class="gestionarPersonas" asp-action="listadoUsuarios" asp-controller="Persona">
+        <img id="imgGestionarMascotas" src="~/img/personas.png" alt="">
+        <span><strong>Lista de usuarios</strong></span>
+    </a>
+    <a class="gestionarPersonas" asp-action="ListadoPersonas" asp-controller="Persona">
+        <img id="imgGestionarMascotas" src="~/img/empleados.png" alt="">
+        <span><strong>Lista de personas</strong></span>
+    </a>
+</div>

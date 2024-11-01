@@ -1,0 +1,47 @@
+﻿@model List<MisMascotasModel>
+@{
+    var autonumerico = 1;
+    ViewData["Title"] = "Mis Mascotas";
+
+}
+<div id="inicioTitulo">
+    <h1 id="titulo_azul" class="titulopersona">MIS MASCOTAS</h1>
+</div>
+<div id="container_table">
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Nombre del Animal</th>
+            <th>Especie</th>
+            <th>Ubicación</th>
+            <th>Acción</th>
+            <th>Acción</th>
+        </tr>
+        @foreach (var item in Model){
+        <tr>
+            <td>@autonumerico</td>
+            <td>@item.nombreMascota</td>
+            <td>@item.especieMascota</td>
+            <td>@item.ubicacion</td>
+            <td>
+                    <form method="post" asp-action="modificarRegistroMedicoVeterinario" asp-controller="Mascotas">
+                       <button class="btn azul">Editar</button>
+                        <input type="hidden" name="idRegistro" value="@item.idRegistroMedico" />
+                  </form>
+            </td>
+            <td>
+                <form method="post" asp-action="EliminarMascota" asp-controller="Persona">
+                       <button class="btn rojo">Eliminar</button>
+                        <input type="hidden" name="id_mascota" value="@item.idMascota" />
+                  </form>
+                
+            </td>
+        </tr>
+            autonumerico++;
+        }
+    </table>
+</div>
+<div id="container_button">
+    <a class="btn gris" asp-action="solicitudes" asp-controller="Persona">Volver</a>
+    <label></label>
+</div>

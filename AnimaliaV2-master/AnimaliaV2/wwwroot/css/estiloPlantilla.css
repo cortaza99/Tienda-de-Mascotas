@@ -1,0 +1,39 @@
+﻿body {
+    padding: 1.5rem;
+}
+
+.titulo1 {
+    text-align: center;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #000;
+    color: #fff;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: 4rem;
+}
+
+#mascotas {
+    width: 3rem;
+    height: 3rem;
+}

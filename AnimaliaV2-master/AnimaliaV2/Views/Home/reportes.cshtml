@@ -1,0 +1,62 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<h1 class="titulo" id="tituloInicio">Reportes</h1>
+<form asp-action="prueba" asp-controller="Home">
+    <div id="displayborder">
+
+        <div id="display_filas">
+            <div id="displaycolumnas">
+                <label>OPCIONES:</label>
+                <label style="display: none;" id="labelFecha">FECHA:</label>
+            </div>
+            <div id="displaycolumnas">
+                @if (User.IsInRole("1"))
+                {
+                    <select name="a">
+                    <option value="1">Reporte de Mascotas Adoptadas</option>
+                    <option value="2">Reporte de Mascotas en Proceso de Adoción</option>
+                    <option value="3">Reporte de Mascotas no Adoptadas</option>
+                    <option value="4">Reporte de Cantidad de Mascotas Adoptadas</option>
+                    <option value="9">Reporte de Mascotas por Especie</option>
+                    <option value="10">Reporte de Mascotas por Raza</option>
+                </select>
+                   
+                }
+
+                @if (User.IsInRole("2"))
+                {
+                    <select name="a" onchange="toggleFecha(this)">
+                        <option value="5">Reporte de Mascotas Registradas</option>
+                        <option value="6">Reporte de Mascotas por Fecha</option>
+                        <option value="7">Reporte de Mascotas Adoptadas</option>
+                        <option value="8">Reporte de Mascotas no Adoptadas</option>
+                    </select>
+                    <input name="fecha" id="inputFecha" type="date" style="display: none;">
+                }
+            </div>
+        </div>
+        <div id="container_img">
+            <button><img id="imagenPDF" src="~/img/pdf.png" alt=""></button>
+        </div>
+    </div>
+</form>
+<script>
+    function toggleFecha(selectElement) {
+        var labelFecha = document.getElementById("labelFecha");
+        var inputFecha = document.getElementById("inputFecha");
+
+        if (selectElement.value == "6") {
+            labelFecha.style.display = "block";
+            inputFecha.style.display = "block";
+        } else {
+            labelFecha.style.display = "none";
+            inputFecha.style.display = "none";
+        }
+    }
+</script>
+
+

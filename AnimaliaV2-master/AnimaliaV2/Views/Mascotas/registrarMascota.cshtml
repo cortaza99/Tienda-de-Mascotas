@@ -1,0 +1,97 @@
+﻿@model RegistroMascotaViewModel
+@{
+    ViewData["Title"] = "Registrar Mascota";
+   
+}
+
+
+<h1 class="titulo" id="tituloInicio">Registro de mascota</h1>
+<form method="post" asp-action="registrarMascota" asp-controller="Mascotas" enctype="multipart/form-data">
+    <div class="containerFormularioRegistro">
+        <div class="entradaFormulario">
+            <label>Nombre mascota</label>
+            <input placeholder="Opcional" asp-for="mascota.nombreMascota" type="text">
+        </div>
+        <div class="entradaFormulario">
+            <label for="">Especie mascota:</label>
+            <select class="selectFormulario" id="EspecieId" required>
+                <option value="" selected>Seleccionr:</option>
+                @foreach(var item in Model.especies){
+                    <option value=@item.idEspecieMascota>@item.especieMascota</option>
+                }
+            </select>
+        </div>
+        <div class="entradaFormulario">
+            <label for="">Raza mascota:</label>
+            <select class="selectFormulario" id="RazaId" required></select>
+            @Html.HiddenFor(model=>model.mascota.fk_idRaza,new{id="RazaIdHidden"})
+        </div>
+    </div>
+    <div class="containerFormularioRegistro segundoRegistro">
+        <div class="entradaFormulario">
+            <label for="">Color mascota</label>
+            <input type="text" asp-for="mascota.colorMascota" required>
+        </div>
+        <div class="entradaFormulario">
+            <label for="">¿Mascota Rescatada?</label>
+            <input type="checkbox" asp-for="mascota.mascota_rescatada">
+        </div>
+        <div class="entradaFormulario" id="radios">
+            <label for="">Sexo de la mascota</label>
+            <div class="radioEntradas">
+                <label for="option1">Hembra</label>
+                <input type="radio" asp-for="mascota.fk_idSexoAnimal" id="option1" value="2" required>
+            </div>
+            <div class="radioEntradas">
+                <label for="option2">Macho</label>
+                <input type="radio" asp-for="mascota.fk_idSexoAnimal" id="option2" value="1" required>
+            </div>
+        </div>
+        <div class="entradaFormulario">
+            <label for="">Nacimiento</label>
+            <input type="date" asp-for="mascota.nacimientoMascota">
+        </div>
+    </div>
+    <div class="containerFormularioRegistro">
+        <div class="entradaFormulario">
+            <label for="">Altura(cm)</label>
+            <input placeholder="Opcional"  type="number" asp-for="mascota.alturaMascota">
+        </div>
+        <div class="entradaFormulario">
+            <label for="">Peso(kg)</label>
+            <input  placeholder="Opcional" type="number" asp-for="mascota.pesoMascota">
+        </div>
+        <div class="entradaFormulario">
+            <label for="">Departamento:</label>
+            <select class="selectFormulario" id="DepartamentoId" required>
+                <option value="" selected>Seleccionar:</option>
+                @foreach (var item in Model.departamentos)
+                {
+                    <option value=@item.IdDepartamento>@item.nombreDepartamento</option>
+                }
+            </select>
+        </div>
+    </div>
+    <div class="containerFormularioRegistro tercerRegistro">
+        <div class="entradaFormulario">
+            <label for="">Municipio:</label>
+            <select class="selectFormulario" id="MunicipioId"></select>
+            @Html.HiddenFor(model=>model.mascota.fk_idMunicipio,new{id="MunicipioIdHidden"})
+            
+        </div>
+        <div class="entradaFormulario">
+            <img id="imagenSubirArchivo" src="~/img/siluetaDePerro.png" alt="delete">
+            <input type="file" name="archivo" required>
+        </div>
+        <div class="entradaFormulario">
+            <label for="">Descripcion</label>
+            <textarea placeholder="Opcional..." asp-for="mascota.descripcionMascota" id="" cols="45" rows="5"></textarea>
+        </div>
+    </div>
+    <div class="containerFormularioRegistro quintoRegistro">
+        <button class="btn azul">Continuar</button>
+    </div>
+
+</form>
+
+

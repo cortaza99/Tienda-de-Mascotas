@@ -1,0 +1,51 @@
+﻿@model  List<PersonaModel>
+@{
+    ViewData["Title"] = "Listado de Personas";
+
+}
+<div id="container_img">
+    <div>
+        <img id="img5" src="~/img/hombre.png" alt="img5">
+    </div>
+    <div id="inicioTitulo">
+        <h1 id="titulo_tenue" class="titulopersona">LISTADO DE PERSONAS</h1>
+    </div>
+    <div>
+        <img id="img5" src="~/img/mujer.png" alt="img5">
+    </div>
+</div>
+
+<div id="container_table">
+    <table class="AnchoTable2">
+        <tr>
+            <th>N° documento</th>
+            <th>Nombre Completo</th>
+            <th>Fecha de Nacimiento</th>
+            <th>Dirección</th>
+            <th>Correo</th>
+            <th>Opción</th>
+        </tr>
+         @foreach (var item in Model){
+        <tr>
+            <td>@item.documentoPersona</td>
+            <td>@item.nombrePersona</td>
+                <td>@(Convert.ToDateTime(item.fechaNacPersona).ToString("dd-MM-yyyy"))</td>
+            <td>@item.direcccion</td>
+            <td>@item.correo_electronico</td>
+            <td>
+                    <form method="post" asp-action="EditarPersona" asp-controller="Persona">
+                        <button class="btn verde">Editar</button>
+                        <input type="hidden" name="id_persona" value="@item.idPersona" />
+                    </form>
+               
+            </td>
+        
+        </tr>
+        }
+
+    </table>
+</div>
+<div id="container_button">
+    <a class="btn gris" asp-action="gestionarPersonas" asp-controller="Persona">Volver</a>
+
+</div>

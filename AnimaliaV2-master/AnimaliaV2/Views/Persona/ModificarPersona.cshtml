@@ -1,0 +1,41 @@
+﻿@model PersonaModel
+@{
+    ViewData["Title"] = "Datos Personales";
+
+}
+<div id="inicioTitulo">
+    <h1 id="tituloInicio" class="titulopersona">DATOS PERSONALES</h1>
+</div>
+<form method="post" asp-action="ModificarPersona" asp-controller="Persona">
+    <div id="displayflex">
+        <div id="display">
+            <input type="hidden" asp-for="idPersona" value="@Model.idPersona">
+            <label>Número de Documento:</label>
+            <input type="text" class="opacity" readonly value="@Model.documentoPersona">
+            <label>Segundo Nombre:</label>
+            <input type="text" class="opacity" placeholder="Opcional" readonly value="@Model.snombrePersona">
+            <label>Segundo Apellido:</label>
+            <input type="text" class="opacity"  placeholder="Opcional" readonly value="@Model.sapellidoPersona">
+            <label>Dirección:</label>
+            <input type="text" class="opacity" readonly value="@Model.direcccion">
+            <label>Teléfono:</label>
+            <input type="text" asp-for="telefono" required value="@Model.telefono">
+        </div>
+        <div id="display">
+            <label>Primer Nombre:</label>
+            <input type="text" class="opacity" readonly value="@Model.nombrePersona">
+            <label>Primer Apellido:</label>
+            <input type="text" class="opacity" readonly value="@Model.apellidoPersona">
+            <label>Fecha de Nacimiento: </label>
+            <input type="text" class="opacity" readonly value="@(Model.fechaNacPersona == null || Model.fechaNacPersona == " " ? " Sin registrar" :  Convert.ToDateTime(Model.fechaNacPersona).ToString("dd/MM/yyyy"))">
+            <label>Correo Electrónico:</label>
+            <input type="text" placeholder="perez99@gmail.com" required asp-for="correo_electronico" value="@Model.correo_electronico">
+        </div>
+        <div>
+            <img id="inicio3" src="~/img/registrar_persona.png" alt="inicio3">
+        </div>
+    </div>
+    <div id="iniciocenter">
+        <button class="btn gris">Modificar</button>
+    </div>
+</form>

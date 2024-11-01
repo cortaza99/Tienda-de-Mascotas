@@ -1,0 +1,87 @@
+﻿@model RegistroMedicoMascotaViewModel
+@{
+    ViewData["Title"] = "Registro Medico Veterinario";
+}
+
+<a class="btn azul" onclick="history.back()" asp-action="registrarMascota" asp-controller="Mascotas">Regresar</a>
+<h1 class="titulo" id="tituloInicio">Registro Medico Veterinario</h1>
+<form method="post" asp-action="registroMedicoVeterinario" asp-controller="Mascotas" id="formularioRegistro">
+    <div class="containerFormularioRegistro">
+        <div class="entradaFormulario">
+            <label for="">Dieta</label>
+            <input type="text" asp-for="registro.dieta" required>
+            
+        </div>
+        <div class="entradaFormulario" id="especialRegistroMedico">
+            <label for="">¿Animal con condicion especial?</label>
+            <input type="checkbox" asp-for="registro.condicionEspecial">
+        </div>
+        <div class="entradaFormulario">
+            <img id="imagenRegistroMedico" src="~/img/AnimalLastimado.png" alt="">
+        </div>
+    </div>
+    <div class="containerFormularioRegistro segundoRegistroMedico">
+        <div class="tarjetaAntecedente">
+            <div class="tarjetaAntecedente-header">
+                <p><strong>Agregar antecedente</strong></p>
+            </div>
+            <div class="tarjetaAntecedente-body">
+                <input type="text" id="infoAntecedente">
+                <button type="button" class="btn azul" id="btnAgregarAntecedente">Agregar</button>
+                <button type="button" class="btn rojo" id="btnLimpiarAntecedente">Limpiar</button>
+            </div>
+        </div>
+        <div class="tarjetaAntecedente">
+            <div class="tarjetaAntecedente-header">
+                <p>
+                    <strong>Agregar vacuna</strong><img id="vacunasImagen" src="~/img/vacunas.png" alt="">
+                </p>
+            </div>
+            <div class="tarjetaAntecedente-body">
+                <select class="selectFormulario" name="opciones" id="infoVacuna">
+                    <option value="" selected>Seleccione:</option>
+                    @foreach (var item in Model.vacunas)
+                    {
+                        <option value=@item.idVacuna>@item.nombreVacuna</option>
+                    }
+                </select>
+                <button type="button" class="btn azul" id="btnAgregarVacuna">Agregar</button>
+                <button type="button" class="btn rojo" id="btnLimpiarVacuna">Limpiar</button>
+            </div>
+        </div>
+    </div>
+    <div class="containerFormularioRegistro tablasRegistroMedico">
+        <table class="tablaDeAntecedente tablaRegistroMedico" id="tabla-antecedentes">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Descripcion antecedente</th>
+                    <th>Fecha</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <table class="tablaDeAntecedente tablaRegistroMedico" id="tabla-vacunas">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Vacuna</th>
+                    <th>Fecha</th>
+                </tr>
+            </thead>
+            <tbody>
+               
+            </tbody>
+        </table>
+    </div>
+    <div class="containerFormularioRegistro quintoRegistro">
+        <input type="hidden" id="antecedentesMascota" value="" asp-for="Antecedentes" />
+        <input type="hidden" id="vacunasMascota" value="" asp-for="VacunasAnimal" />
+        <button class="btn verde">Registrar</button>
+    </div>
+
+
+
+</form>
+

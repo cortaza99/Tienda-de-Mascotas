@@ -1,0 +1,59 @@
+﻿@model List<GestionarSolicitudViewModel>
+@{
+    var autonumerico = 1;
+    ViewData["Title"] = "gestionar solicitudes";
+    
+}
+<div id="container_colum">
+    <div id="inicioTitulo">
+        <h1 id="titulo_azul" class="tamaniotitulo">GESTIÓN DE SOLICITUDES</h1>
+    </div>
+    <div>
+        <img id="inicio4" src="~/img/solicitud.png" alt="inicio4">
+    </div>
+</div>
+
+    <div id="container_table">
+        <table class="AnchoTable">
+            <tr>
+                <th>ID</th>
+                <th>Nombre del Animal</th>
+                <th>Estado</th>
+                <th>Nombre Completo</th>
+                <th>Teléfono</th>
+                <th>Acciones</th>
+            </tr>
+            @foreach (var item in Model){
+            <tr>
+                <td>@autonumerico</td>
+                <td>@item.nombreMascota</td>
+                <td>@item.estado_Solicitud</td>
+                <td>@item.Nombre_Completo</td>
+                <td>@item.telefono</td>
+
+                <td>
+                    <div>
+                        <form method="post" asp-action="denegarSolicitud" asp-controller="Persona">
+                        <button class="btn rojo">Denegar</button>
+                        <input type="hidden" name="id_denegar" value="@item.id_solicitud" />
+                        </form>
+                    
+                        <form method="post" asp-action="AprobarSolicitud" asp-controller="Persona">
+                        <button class="btn azul">Aprobar</button>
+                        <input type="hidden" name="id_aprobar" value="@item.id_solicitud" />
+                         <input type="hidden" name="id_mascota" value="@item.id_mascota" />
+                        </form>
+                     </div>
+                 </td>
+            </tr>
+                autonumerico++;
+            }
+           
+        </table>
+
+    </div>
+
+    <div id="container_button">
+    <a class="btn rojo" asp-action="solicitudes" asp-controller="Persona">Volver</a>
+        <label></label>
+    </div>

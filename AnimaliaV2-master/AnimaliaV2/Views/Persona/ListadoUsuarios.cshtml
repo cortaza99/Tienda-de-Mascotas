@@ -1,0 +1,57 @@
+﻿@model List<UsuarioViewModel>
+@{
+    var autonumerico = 1;
+    ViewData["Title"] = "Listado de Personas";
+
+}
+<div id="container_img">
+    <div>
+        <img id="img5" src="~/img/hombre.png" alt="img5">
+    </div>
+    <div id="inicioTitulo">
+        <h1 id="titulo_tenue" class="titulopersona">LISTADO DE USUARIOS</h1>
+    </div>
+    <div>
+        <img id="img5" src="~/img/mujer.png" alt="img5">
+    </div>
+</div>
+
+<div id="container_table">
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Contraseña</th>
+            <th>Rol</th>
+            <th>Opción</th>
+            <th>Opción</th>
+        </tr>
+         @foreach (var item in Model){
+        <tr>
+            <td>@autonumerico</td>
+            <td>@item.nombreUsuario</td>
+            <td>@item.contraseniaUsuario</td>
+            <td>@item.rol</td>
+            <td>
+                    <form method="post" asp-action="Modificar_Usuario" asp-controller="Persona">
+                        <a class="btn verde" href="@Url.Action("Modificar_Usuario", new { id_usuario = item.idUsuario })">Editar</a>
+                        <input type="hidden" name="id_usuario" value="@item.idUsuario" />
+                    </form>
+                
+            </td>
+            <td>
+                    <form method="post" asp-action="Eliminar_Usuario" asp-controller="Persona">
+                        <button class="btn rojo">Eliminar</button>
+                        <input type="hidden" name="id_usuario" value="@item.idUsuario" />
+                    </form>
+                
+            </td>
+            </tr>
+            autonumerico++;
+
+        }
+    </table>
+</div>
+<div id="container_button">
+    <a class="btn gris" asp-action="gestionarPersonas" asp-controller="Persona">Volver</a>
+</div>

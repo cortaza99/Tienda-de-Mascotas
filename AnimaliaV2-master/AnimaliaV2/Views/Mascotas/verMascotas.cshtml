@@ -1,0 +1,38 @@
+﻿@model List<MascotaModel>
+@{
+    ViewData["Title"] = "Ver Mascotas";
+}
+<h1 class="titulo" id="tituloInicio">Ver mascotas</h1>
+
+<div class="slide-container swiper">
+    <div class="slide-content">
+        <div class="card-wrapper swiper-wrapper">
+            @foreach (var item in Model)
+            {
+                <div class="card swiper-slide">
+                    <div class="image-content">
+                        <span class="overlay"></span>
+
+                        <div class="card-image">
+                            <img src="~/imgMascotas/@item.imgUbicacionExterna" alt="default" class="card-img">
+                        </div>
+                    </div>
+
+                    <div class="card-content">
+                        <h2 class="name">@item.nombreMascota</h2>
+                        <p class="description">@item.descripcionMascota</p>
+                        <form method="post" asp-action="verInfoDetalladaMascota" asp-controller="Mascotas">
+                            <button class="button">Ver mas</button>
+                            <input type="hidden" value=@item.idMascota name="id"></input>
+                        </form>
+                    </div>
+                </div>
+
+            }
+        </div>
+    </div>
+
+    <div class="swiper-button-next swiper-navBtn"></div>
+    <div class="swiper-button-prev swiper-navBtn"></div>
+    <div class="swiper-pagination"></div>
+</div>

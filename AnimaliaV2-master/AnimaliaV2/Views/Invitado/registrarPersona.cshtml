@@ -1,0 +1,42 @@
+﻿@model PersonaModel
+@{
+    ViewData["Title"] = "registrar persona";
+}
+    <div id="inicioTitulo">
+        <h1 id="tituloInicio" class="titulopersona">DATOS DE LA PERSONA</h1>
+    </div>
+    <form method="post" asp-action="registrarPersona" asp-controller="Invitado">
+
+        <div id="displayflex">
+            <div id="display">
+                <label>Número de Documento:</label>
+            <input type="text" required asp-for="documentoPersona">
+                <label>Segundo Nombre:</label>
+            <input type="text" placeholder="Opcional" asp-for="snombrePersona">
+                <label>Segundo Apellido:</label>
+            <input type="text" placeholder="Opcional" asp-for="sapellidoPersona">
+                <label>Dirección:</label>
+            <input type="text" required asp-for="direcccion">
+                <label>Teléfono:</label>
+            <input type="text" required asp-for="telefono">
+            </div>
+            <div id="display">
+                <label>Primer Nombre:</label>
+            <input type="text" required asp-for="nombrePersona">
+                <label>Primer Apellido:</label>
+            <input type="text" required asp-for="apellidoPersona">
+                <label>Fecha de Nacimiento: </label>
+            <input type="date" required asp-for="fechaNacPersona">
+                <label>Correo Electrónico:</label>
+            <input type="text" placeholder="perez99@gmail.com" required asp-for="correo_electronico">
+            </div>
+            <div>
+                <img id="inicio3" src="~/img/registrar_persona.png" alt="inicio3">
+            </div>
+        </div>
+
+        <div id="iniciocenter">
+            <a class="btn gris" asp-action="Index" asp-controller="Invitado">Volver</a>
+            <button class="btn gris">Continuar</button>
+        </div>
+    </form>

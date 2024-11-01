@@ -1,0 +1,137 @@
+﻿@model ModificarRegistroVeterinarioViewModel
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    var autonumerico = 1;
+    var autonumerico2 = 1;
+
+}
+<a asp-action="misMascotas" asp-controller="Persona" class="btn azul">Regresar</a>
+<h1 class="titulo" id="tituloInicio">Modificar Registro Medico Veterinario</h1>
+<div class="containerFormularioRegistro">
+    <div class="entradaFormulario">
+        <label for="">Dieta</label>
+        <input disabled value="@Model.miRegistro.dieta" type="text">
+    </div>
+    <div class="entradaFormulario" id="especialRegistroMedico">
+        <label for="">¿Animal con condicion especial?</label>
+        @{
+            if (Model.miRegistro.condicionEspecial == "0")
+            {
+                <input value=false disabled type="checkbox">
+            }
+            else
+            {
+                <input value=true disabled type="checkbox">
+            }
+
+        }
+    </div>
+    <div class="entradaFormulario">
+        <img id="imagenRegistroMedico" src="~/img/AnimalLastimado.png" alt="">
+    </div>
+</div>
+<div class="containerFormularioRegistro segundoRegistroMedico">
+    <div class="tarjetaAntecedente">
+        <div class="tarjetaAntecedente-header">
+            <p><strong>Agregar antecedente</strong></p>
+        </div>
+        <div class="tarjetaAntecedente-body">
+            <form asp-action="actualizar_agregarAntecedente" asp-controller="Mascotas">
+                <input type="text" name="descripcionAntecedente" required>
+                <input type="hidden" name="idRegistro" value="@Model.miRegistro.idRegistroMedicoVeterinario" />
+                <button class="btn azul">Agregar</button>
+            </form>
+           
+        </div>
+    </div>
+    <div class="tarjetaAntecedente">
+        <div class="tarjetaAntecedente-header">
+            <p>
+                <strong>Agregar vacuna</strong><img id="vacunasImagen" src="~/img/vacunas.png"
+                                                    alt="">
+            </p>
+        </div>
+        <div class="tarjetaAntecedente-body">
+            <form method="post" asp-action="actualizar_agregarVacuna" asp-controller="Mascotas">
+                <select class="selectFormulario" name="idVacuna" required>
+                    <option selected value="">Seleccione</option>
+                    @foreach (var item in Model.vacunaModels)
+                    {
+                        <option value=@item.idVacuna>@item.nombreVacuna</option>
+                    }
+                </select>
+                <input type="hidden" name="idRegistro" value="@Model.miRegistro.idRegistroMedicoVeterinario" />
+                <button class="btn azul">Agregar</button>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="containerFormularioRegistro tablasRegistroMedico">
+    <table class="tablaDeAntecedente tablaRegistroMedico">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Descripcion antecedente</th>
+                <th>Fecha</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach(var item in Model.misAntecedentes)
+            {
+                <tr>
+                    <td>@autonumerico</td>
+                    <td>
+                        <p>@item.descripcionAntecedente</p>
+                    </td>
+                    <td>
+                        <p>@item.fechaAntecedente</p>
+                    </td>
+                    <td>
+                        <form method="post" asp-action="actualizar_eliminarAntecedente" asp-controller="Mascotas">
+                            <input type="hidden" name="idAntecedente" value="@item.idAntecedenteMedico" />
+                            <input type="hidden" name="idRegistro" value="@Model.miRegistro.idRegistroMedicoVeterinario" />
+                            <button class="btn rojo">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+                autonumerico++;
+            }
+        </tbody>
+    </table>
+    <table class="tablaDeAntecedente tablaRegistroMedico">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Vacuna</th>
+                <th>Fecha</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var item in Model.misVacunas)
+            {
+                <tr>
+                    <td>@autonumerico2</td>
+                    <td>
+                        <p>@item.nombreVacuna</p>
+                    </td>
+                    <td>
+                        <p>@item.fecha</p>
+                    </td>
+                    <td>
+                        <form method="post" asp-action="actualizar_eliminarVacuna" asp-controller="Mascotas">
+                            <input type="hidden" name="idVacuna" value="@item.idVacunaanimal" />
+                            <input type="hidden" name="idRegistro" value="@Model.miRegistro.idRegistroMedicoVeterinario" />
+                            <button class="btn rojo">Eliminar</button>
+                        </form>
+                     </td>
+                </tr>
+                autonumerico2++;
+            }  
+        </tbody>
+    </table>
+</div>

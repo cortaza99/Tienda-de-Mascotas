@@ -1,0 +1,47 @@
+﻿@model List<SolicitudAdopcionViewModel>
+@{
+    var autonumerico = 1;
+    ViewData["Title"] = "mis solicitudes";
+}
+<div id="container_colum">
+    <div id="inicioTitulo">
+        <h1 id="titulo_azul" class="tamaniotitulo">MIS SOLICITUDES</h1>
+    </div>
+    <div>
+        <img id="inicio4" src="~/img/adoption.png" alt="inicio4">
+    </div>
+</div>
+<form method="post" asp-action="eliminarSolicitud" asp-controller="Persona">
+    <div id="container_table">
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Nombre del Animal</th>
+                <th>Especie</th>
+                <th>Estado</th>
+                <th>Ubicación de la Mascota</th>
+                <th>Acciones</th>
+            </tr>
+            
+            @foreach (var item in Model){
+            
+            <tr>
+                <td>@autonumerico</td>
+                <td>@item.nombreMascota</td>
+                <td>@item.especieMascota</td>
+                <td>@item.estado_Solicitud</td>
+                <td>@item.ubicacionMascota</td>
+                <td>
+                    <button class="btn rojo">Cancelar</button>
+                        <input type="hidden" name="id" value="@item.idSolicitudAdopcion" />
+                </td>
+            </tr> 
+                autonumerico++;
+            }
+        </table>
+    </div>
+</form>
+    <div id="container_button">
+    <a class="btn gris" asp-action="solicitudes" asp-controller="Persona">Volver</a>
+        <label></label>
+    </div>

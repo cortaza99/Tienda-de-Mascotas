@@ -1,0 +1,60 @@
+﻿@model UsuarioModel
+@{
+    
+    Layout = null;
+    ViewData["Title"] = "Iniciar Sesion";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Layout</title>
+    <link rel="stylesheet" href="~/css/estiloProyecto.css" asp-append-version="true">
+
+</head>
+
+<body>
+    
+        <a class="btn azul" id="mi-boton" asp-action="Index" asp-controller="Invitado">Inicio</a>
+    
+        <div id="iniciarSesion">
+            <img id="iniciarSesion1" src="~/img/iniciarSesion.jpg" alt="iniciarSesion">
+        <form method="post" asp-action="Index" asp-controller="Acceso">
+            <div id="display_row_">
+                <div id="displaycolum_">
+                    <label for="">USUARIO:</label>
+                    <label for="">CONTRASEÑA:</label>
+                </div>
+                <div id="displaycolum_">
+                    <input class="campoDatos" type="text" asp-for="nombreUsuario" required>
+                    <input class="campoDatos" type="password" asp-for="contraseniaUsuario" required>
+                </div>
+            </div>
+            <div id="container_button_">
+                <button class="btn gris">Iniciar Sesion</button>
+            </div>
+        </form>
+        <a id="linkIniciarSesion" asp-action="Index" asp-controller="Invitado">¿No tienes una cuenta?Registrate</a>
+        </div>
+</body>
+</html>
+
+@if (ViewBag.Message != null)
+{
+    @using System.Web
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.css">
+    <script type="text/javascript">
+        var mensaje = '@HttpUtility.HtmlDecode(ViewBag.Message)';
+        Swal.fire({
+            title: 'Error',
+            text: mensaje,
+            icon: 'error',
+            confirmButtonText: 'Aceptar'
+        });
+    </script>
+}
